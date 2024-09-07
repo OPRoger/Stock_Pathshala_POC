@@ -10,6 +10,8 @@ import 'package:stock_pathshala/Pages/OTPverification/OTPverification_page.dart'
 class LoginController extends GetxController{
   TextEditingController otpText = TextEditingController();
   var phoneNumber = ''.obs;
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
 
   Future<void> login() async {
     var url = 'https://internal.stockpathshala.in/api/v1/login-register';
@@ -30,13 +32,10 @@ class LoginController extends GetxController{
 
   Future<void> verifyOTP() async {
     String otp = otpText.text;  // Fetch OTP directly from the TextEditingController
-
-
     if (otp.isEmpty) {
       Get.snackbar("Error", "Please enter the OTP");
       return;
     }
-
     var url = 'https://internal.stockpathshala.in/api/v1/verify-login-register';
     var response = await http.post(
       Uri.parse(url),
@@ -48,14 +47,23 @@ class LoginController extends GetxController{
     );
 
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      var accessToken = data['access_token'];
-      var prefs = await SharedPreferences.getInstance();
-      prefs.setString('accessToken', accessToken);
-      Get.to(ClassListingPage());
-    } else {
-      Get.snackbar("Error", "Invalid OTP");
+      print(response.body);
+      final json = jsonDecode(response.body);
+      if(json['status']==true){
+        // var prefs = await SharedPreferences.getInstance();
+        var accessToken = json['token'];
+        final SharedPreferences? prefs = await _prefs;
+        await prefs?.setString('token', accessToken);
+        Get.to(ClassListingPage());
+        otpText.clear();
+      }else {
+        Get.snackbar("Error", "Invalid OTP");
+      }
+
     }
+    // else {
+    //   Get.snackbar("Error", "Invalid OTP");
+    // }
   }
 }
 
