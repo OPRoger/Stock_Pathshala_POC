@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:stock_pathshala/Pages/Auth/auth_page.dart';
+import 'package:stock_pathshala/Pages/Auth/widgets/login_form.dart';
 import 'package:stock_pathshala/config/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'Pages/ClassListingPage/ClassListing_Page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var prefs = await SharedPreferences.getInstance();
+  var token = prefs.getString('accessToken');
+
+  runApp(MyApp(token != null));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool isLoggedIn;
 
-  // This widget is the root of your application.
+  MyApp(this.isLoggedIn);
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
       darkTheme: darkTheme,
-      themeMode: ThemeMode.light,
-      home: const AuthPage(),
+      themeMode: ThemeMode.dark,
+      home: isLoggedIn ? ClassListingPage() : LoginForm(),
     );
   }
 }

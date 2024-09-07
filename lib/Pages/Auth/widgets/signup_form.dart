@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stock_pathshala/controller/Auth_Controller.dart';
+// import 'package:stock_pathshala/controller/Auth_Controller.dart';
 import 'package:stock_pathshala/widget/primaryButton.dart';
 
 class SignupForm extends StatefulWidget {
@@ -12,7 +12,7 @@ class SignupForm extends StatefulWidget {
 }
 
 class _SignupFormState extends State<SignupForm> {
-  AuthController authController = Get.put(AuthController());
+  // AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,7 +24,7 @@ class _SignupFormState extends State<SignupForm> {
               height: 30,
             ),
             TextField(
-              controller: authController.nameController,
+              // controller: authController.nameController,
               decoration: const InputDecoration(
                 hintText: "Name",
                 labelText: "Name",
@@ -35,7 +35,7 @@ class _SignupFormState extends State<SignupForm> {
               height: 30,
             ),
             TextField(
-              controller: authController.emailController,
+              // controller: authController.emailController,
               decoration: const InputDecoration(
                 hintText: "Email",
                 labelText: "Email",
@@ -46,7 +46,7 @@ class _SignupFormState extends State<SignupForm> {
               height: 30,
             ),
             TextField(
-              controller: authController.passwordController,
+              // controller: authController.passwordController,
               obscureText: true,
               decoration: const InputDecoration(
                 hintText: "Password",
@@ -64,8 +64,8 @@ class _SignupFormState extends State<SignupForm> {
                   BtName: "Sign UP",
                   icon: Icons.lock_open,
                   ontap: () {
-                    authController.isSignUp(authController.emailController.text,
-                        authController.passwordController.text,  authController.nameController.text);
+                    // authController.isSignUp(authController.emailController.text,
+                    //     authController.passwordController.text,  authController.nameController.text);
                     // Get.offAllNamed("/homePage") ;
                   },
                 ),

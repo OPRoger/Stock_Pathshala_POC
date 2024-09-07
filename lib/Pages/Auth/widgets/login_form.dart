@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:stock_pathshala/controller/Auth_Controller.dart';
+import 'package:stock_pathshala/controller/login_controller.dart';
+// import 'package:stock_pathshala/controller/Auth_Controller.dart';
 import 'package:stock_pathshala/widget/primaryButton.dart';
 
 class LoginForm extends StatefulWidget {
@@ -13,8 +14,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-
-  AuthController authController = Get.put(AuthController());
+  final LoginController loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,27 +25,13 @@ class _LoginFormState extends State<LoginForm> {
             SizedBox(
               height: 30,
             ),
-             TextField(
-               controller: authController.emailController,
-              decoration:const InputDecoration(
-                hintText: "Email",
-                labelText: "Email",
-                prefixIcon: Icon(Icons.alternate_email_rounded),
-              ),
+            TextField(
+              decoration: InputDecoration(labelText: 'Enter mobile number'),
+              onChanged: (value) {
+                loginController.phoneNumber.value = value;
+              },
             ),
-            const SizedBox(
-              height: 30,
-            ),
-             TextField(
-               controller: authController.passwordController,
-              obscureText: true,
-              decoration:const InputDecoration(
-                hintText: "Password",
-                labelText: "Password",
 
-                prefixIcon: Icon(Icons.password),
-              ),
-            ),
             const SizedBox(
               height: 30,
             ),
@@ -56,7 +42,8 @@ class _LoginFormState extends State<LoginForm> {
                   BtName: "Login",
                   icon: Icons.lock_open,
                   ontap: () {
-                    authController.isLogin(authController.emailController.text, authController.passwordController.text);
+                    loginController.login();
+                    // authController.isLogin(authController.emailController.text, authController.passwordController.text);
                     // Get.offAllNamed("/homePage");
                   },
                 ),
