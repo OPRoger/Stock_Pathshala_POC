@@ -17,38 +17,23 @@ class _LoginFormState extends State<LoginForm> {
   final LoginController loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Container(
+    return Scaffold(
+      appBar: AppBar(title: Text('Login')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SizedBox(
-              height: 30,
-            ),
             TextField(
               decoration: InputDecoration(labelText: 'Enter mobile number'),
               onChanged: (value) {
                 loginController.phoneNumber.value = value;
               },
             ),
-
-            const SizedBox(
-              height: 30,
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: loginController.login,
+              child: Text('Send OTP'),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:  [
-                PrimaryButton(
-                  BtName: "Login",
-                  icon: Icons.lock_open,
-                  ontap: () {
-                    loginController.login();
-                    // authController.isLogin(authController.emailController.text, authController.passwordController.text);
-                    // Get.offAllNamed("/homePage");
-                  },
-                ),
-              ],
-            )
           ],
         ),
       ),
