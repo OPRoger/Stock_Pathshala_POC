@@ -9,7 +9,7 @@ import 'package:stock_pathshala/Pages/OTPverification/OTPverification_page.dart'
 
 class LoginController extends GetxController{
   TextEditingController otpText = TextEditingController();
-  RxString phoneNumber = ''.obs;
+  var phoneNumber = ''.obs;
 
   Future<void> login() async {
     var url = 'https://internal.stockpathshala.in/api/v1/login-register';
@@ -42,7 +42,7 @@ class LoginController extends GetxController{
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
-        "user_name": phoneNumber,
+        "user_name": phoneNumber.value,
         "otp": otp// Use the otp fetched from the TextController
       }),
     );
