@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       darkTheme: darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       home: isLoggedIn ? ClassListingPage() : LoginForm(),
     );
   }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -22,18 +21,41 @@ class _LoginFormState extends State<LoginForm> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Enter mobile number'),
-              onChanged: (value) {
-                loginController.phoneNumber.value = value;
-              },
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: loginController.login,
-              child: Text('Send OTP'),
-            ),
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 60),
+                  child: Center(
+                    child: Text(
+                      'Phone Authentication',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 50,),
+                Container(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      labelText: 'Enter mobile number',
+                    ),
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      loginController.phoneNumber.value = value;
+                    },
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: loginController.login,
+                  child: Text('Send OTP'),
+                ),
+              ],
+            )
           ],
         ),
       ),
